@@ -1,0 +1,16 @@
+{
+  "name": "award",
+  "description": "award",
+  "space": "0x8a144a9e14bb9ffabf4ed52a1828e8a91a2e65c0",
+  "endDate": "2033-03-05T20:16:07.062Z",
+  "badge": {
+    "name": "badge",
+    "description": "badge",
+    "total": 2,
+    "image": "https://ipfs.io/ipfs/bafkreiapx7kczhfukx34ldh3pxhdip5kgvh237dlhp55koefjo6tyupnj4",
+    "tokenReward": 500000,
+    "lockTime": 31557600000,
+    "tokenSymbol": "RMS"
+  },
+  "network": "rms"
+}
