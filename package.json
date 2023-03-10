@@ -3,8 +3,8 @@
     "@iota/crypto.js": "2.0.0-rc.1",
     "@iota/iota.js": "2.0.0-rc.1",
     "@iota/util.js": "2.0.0-rc.1",
-    "@soonaverse/interfaces": "^0.18.24",
-    "@soonaverse/lib": "^0.18.24",
+    "@soonaverse/interfaces": "^0.18.36",
+    "@soonaverse/lib": "^0.18.36",
     "dayjs": "^1.11.7",
     "lodash": "^4.17.21",
     "ts-node": "^10.9.1"
