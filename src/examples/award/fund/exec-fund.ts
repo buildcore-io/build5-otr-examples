@@ -1,5 +1,5 @@
 import { Award, AwardRepository, SoonEnv } from "@soonaverse/lib";
-import { wait } from "../../utils/wait";
+import { wait } from "../../../utils/wait";
 import { createAward } from "../create/create";
 import { fundAward } from "./fund";
 

@@ -1,16 +1,18 @@
 import { MIN_IOTA_AMOUNT, TangleRequestType } from "@soonaverse/interfaces";
-import config from "../../config.json";
-import { getResponseBlockMetadata } from "../../utils/wallet/block.utils";
-import { getNewWallet } from "../../utils/wallet/Wallet";
-import award from "./award.json";
+import config from "../../../config.json";
+import { getResponseBlockMetadata } from "../../../utils/wallet/block.utils";
+import { getNewWallet } from "../../../utils/wallet/Wallet";
 
-export const createAward = async () => {
-  console.log("Sending award create request");
+export const approveProposal = async (proposalUid: string) => {
+  console.log("Sending proposal approve request");
 
   const wallet = await getNewWallet();
   const sender = await wallet.getIotaAddressDetails(config.mnemonic);
   const metadata = JSON.stringify({
-    request: { requestType: TangleRequestType.AWARD_CREATE, ...award },
+    request: {
+      requestType: TangleRequestType.PROPOSAL_APPROVE,
+      uid: proposalUid,
+    },
   });
 
   const blockId = await wallet.send(

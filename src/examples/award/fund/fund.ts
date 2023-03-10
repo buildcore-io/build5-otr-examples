@@ -1,7 +1,7 @@
 import { TangleRequestType } from "@soonaverse/interfaces";
-import config from "../../config.json";
-import { getResponseBlockMetadata } from "../../utils/wallet/block.utils";
-import { getNewWallet } from "../../utils/wallet/Wallet";
+import config from "../../../config.json";
+import { getResponseBlockMetadata } from "../../../utils/wallet/block.utils";
+import { getNewWallet } from "../../../utils/wallet/Wallet";
 
 export const fundAward = async (
   award: string,

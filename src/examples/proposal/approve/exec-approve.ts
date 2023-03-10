@@ -1,5 +1,5 @@
 import { ProposalRepository, SoonEnv } from "@soonaverse/lib";
-import { wait } from "../../utils/wait";
+import { wait } from "../../../utils/wait";
 import { createProposal } from "../create/create";
 import { approveProposal } from "./approve";
 

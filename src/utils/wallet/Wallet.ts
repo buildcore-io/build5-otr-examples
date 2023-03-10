@@ -93,6 +93,9 @@ export class SmrWallet {
       this.info,
       metadata
     );
+    if (Object.keys(outputsMap).length === 0) {
+      throw Error("No outputs to process. Most likely not balance in the wallet.");
+    }
 
     const remainder = mergeOutputs(cloneDeep(Object.values(outputsMap)));
     remainder.nativeTokens = subtractNativeTokens(remainder, nativeTokens);

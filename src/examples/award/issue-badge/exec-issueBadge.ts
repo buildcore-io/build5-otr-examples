@@ -1,7 +1,7 @@
 import { Award, AwardRepository, SoonEnv } from "@soonaverse/lib";
-import config from "../../config.json";
-import { wait } from "../../utils/wait";
-import { getNewWallet } from "../../utils/wallet/Wallet";
+import config from "../../../config.json";
+import { wait } from "../../../utils/wait";
+import { getNewWallet } from "../../../utils/wallet/Wallet";
 import { createAward } from "../create/create";
 import { fundAward } from "../fund/fund";
 import { issueBadge } from "./issueBadge";
