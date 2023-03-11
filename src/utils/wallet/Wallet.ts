@@ -94,7 +94,9 @@ export class SmrWallet {
       metadata
     );
     if (Object.keys(outputsMap).length === 0) {
-      throw Error("No outputs to process. Most likely not balance in the wallet.");
+      throw Error(
+        "No outputs to process. Most likely not balance in the wallet."
+      );
     }
 
     const remainder = mergeOutputs(cloneDeep(Object.values(outputsMap)));
@@ -122,6 +124,7 @@ export class SmrWallet {
         : { type: REFERENCE_UNLOCK_TYPE, reference: 0 }
     );
 
+    console.log("Calculating PoW and sending block");
     const blockId = await submitBlock(this, packPayload(essence, unlocks));
 
     console.log("Request sent, blockId", blockId);

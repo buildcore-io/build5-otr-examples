@@ -2,6 +2,7 @@
   "dependencies": {
     "@iota/crypto.js": "2.0.0-rc.1",
     "@iota/iota.js": "2.0.0-rc.1",
+    "@iota/pow-wasm.js": "^1.8.6",
     "@iota/util.js": "2.0.0-rc.1",
     "@soonaverse/interfaces": "^0.18.36",
     "@soonaverse/lib": "^0.18.36",

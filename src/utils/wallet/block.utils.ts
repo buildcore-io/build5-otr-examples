@@ -8,7 +8,9 @@ import {
   ITransactionEssence,
   ITransactionPayload,
   IUTXOInput,
+  MAX_BLOCK_LENGTH,
   OutputTypes,
+  serializeBlock,
   SIGNATURE_UNLOCK_TYPE,
   SingleNodeClient,
   TAGGED_DATA_PAYLOAD_TYPE,
@@ -17,7 +19,8 @@ import {
   TRANSACTION_PAYLOAD_TYPE,
   UnlockTypes,
 } from "@iota/iota.js";
-import { Converter } from "@iota/util.js";
+import { WasmPowProvider } from "@iota/pow-wasm.js";
+import { Converter, WriteStream } from "@iota/util.js";
 import { KEY_NAME_TANGLE } from "@soonaverse/interfaces";
 import { wait } from "../wait";
 import { SmrWallet } from "./Wallet";
@@ -66,12 +69,32 @@ export const submitBlock = async (
 ): Promise<string> => {
   const block: IBlock = {
     protocolVersion: DEFAULT_PROTOCOL_VERSION,
-    parents: [],
+    parents: (await wallet.client.tips()).tips,
     payload,
     nonce: "0",
   };
+  block.nonce = await caluclateNonce(block, wallet.info.protocol.minPowScore);
   return await wallet.client.blockSubmit(block);
 };
+
+async function caluclateNonce(
+  block: IBlock,
+  minPowScore: number
+): Promise<string> {
+  const writeStream = new WriteStream();
+  serializeBlock(writeStream, block);
+  const blockBytes = writeStream.finalBytes();
+
+  if (blockBytes.length > MAX_BLOCK_LENGTH) {
+    throw new Error(
+      `The block length is ${blockBytes.length}, which exceeds the maximum size of ${MAX_BLOCK_LENGTH}`
+    );
+  }
+
+  const powProvider = new WasmPowProvider();
+  const nonce = await powProvider.pow(blockBytes, minPowScore);
+  return nonce.toString();
+}
 
 export const packPayload = (
   essence: ITransactionEssence,
