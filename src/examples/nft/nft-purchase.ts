@@ -10,14 +10,6 @@ import { getResponseBlockMetadata } from "../../utils/wallet/block.utils";
 import { getNewWallet } from "../../utils/wallet/Wallet";
 
 export const purchaseRandomNft = async (collection: string) => {
-  const nft = await getFirstUnsoldNft(collection);
-  if (!nft) {
-    throw Error("No more unsold nft in this collection");
-  }
-
-  console.log("Nft soonaverse id", nft.uid);
-  console.log("Nft smr id", nft.mintingData?.nftId, "\n");
-
   console.log("Sending nft purchase request");
 
   const wallet = await getNewWallet();
@@ -25,7 +17,7 @@ export const purchaseRandomNft = async (collection: string) => {
   const metadata = JSON.stringify({
     request: {
       requestType: TangleRequestType.NFT_PURCHASE,
-      nft: nft.mintingData?.nftId,
+      collection: collection,
     },
   });
 
@@ -52,13 +44,4 @@ export const purchaseRandomNft = async (collection: string) => {
   }
 
   return responseMetadata.response;
-};
-
-const getFirstUnsoldNft = async (collection: string) => {
-  const nftRepo = new NftRepository(SoonEnv.TEST);
-  const nfts = await nftRepo.getByField(
-    ["collection", "sold", "locked", "placeholderNft"],
-    [collection, false, false, false]
-  );
-  return head(nfts);
 };
