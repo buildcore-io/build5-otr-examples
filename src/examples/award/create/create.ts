@@ -9,6 +9,8 @@ export const createAward = async () => {
 
   const wallet = await getNewWallet();
   const sender = await wallet.getIotaAddressDetails(config.mnemonic);
+  console.log("Your address: " + sender.bech32);
+
   const metadata = JSON.stringify({
     request: { requestType: TangleRequestType.AWARD_CREATE, ...award },
   });
