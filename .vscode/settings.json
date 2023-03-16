@@ -1,0 +1,29 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnSave": true,
+  "prettier.singleQuote": true,
+  "css.validate": false,
+  "scss.validate": false,
+  "cSpell.words": [
+    "cyrb53",
+    "Ipfs",
+    "ISCP",
+    "Millis",
+    "rehype",
+    "soonaverse",
+    "SoonLabs",
+    "Tailwindcss",
+    "xaxis"
+  ]
+}

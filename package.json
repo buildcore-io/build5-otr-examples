@@ -4,8 +4,8 @@
     "@iota/iota.js": "2.0.0-rc.1",
     "@iota/pow-wasm.js": "^1.8.6",
     "@iota/util.js": "2.0.0-rc.1",
-    "@soonaverse/interfaces": "^0.18.36",
-    "@soonaverse/lib": "^0.18.36",
+    "@soonaverse/interfaces": "^0.18.47",
+    "@soonaverse/lib": "^0.18.47",
     "bip39": "^3.1.0",
     "dayjs": "^1.11.7",
     "lodash": "^4.17.21",
@@ -13,6 +13,6 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.191",
-    "typescript": "^4.9.5"
+    "typescript": "^5.0.2"
   }
 }
