@@ -72,5 +72,7 @@ const exec = async () => {
 };
 
 console.log('Query checks for new quests every 15 minutes');
-// TODO Add interval.
 exec();
+setInterval(() => {
+  exec();
+}, 15 * 60 * 1000);

@@ -3,3 +3,5 @@ node_modules
 Thumbs.db
 firebase-debug.log
 package-lock.json
+src/config.json
+src/examples/crew3toAward/integration-config.json
