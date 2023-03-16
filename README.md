@@ -34,6 +34,21 @@ Approve proposal
 ## ts-node src/examples/proposal/vote/exec-vote.ts
 Vote on proposal
 
+## ts-node src/examples/space/join/exec-join.ts <space ID>
+Join space as member
+
+## ts-node src/examples/space/join/exec-join.ts <space ID>
+Join space as member
+
+## ts-node src/examples/crew3toAward/exec-run.ts
+Run integration between crew3 / awards
+
+## ts-node src/examples/getMyReceiveAddress.ts
+Get your SMR address based on your mnemonic
+
+## ts-node src/examples/randomMnemonicSeed.ts
+Generate random mnemonic seed
+
 # 🤝 Contributing
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/soonaverse/soonaverse/pulls)
