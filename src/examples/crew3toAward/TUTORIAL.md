@@ -26,6 +26,7 @@ Below is an example on how to set-up crew3 integration with Soonaverse awards.
 - edit src/examples/crew3toAward/config.json and set awardUid
 - edit src/examples/crew3toAward/config.json and set questId
 - edit src/examples/crew3toAward/config.json and set Crew3 API ID
+- edit src/examples/crew3toAward/config.json and set crew3CommunityName (i.e. auditone)
 
 ## 4. Use script to query crew3 and issue new badge's when quest completed
 

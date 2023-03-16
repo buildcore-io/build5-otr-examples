@@ -7,7 +7,7 @@ import intConfig from './integration-config.json';
 
 const exec = async () => {
   console.log('Getting latest data from crew3...');
-  fetch('https://api.crew3.xyz/communities/auditone/claimed-quests', {
+  fetch('https://api.crew3.xyz/communities/' + intConfig.crew3CommunityName + '/claimed-quests', {
     method: 'GET',
     headers: {
       'x-api-key': intConfig.crew3Api,
