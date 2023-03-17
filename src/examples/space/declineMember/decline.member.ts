@@ -3,15 +3,16 @@ import config from '../../../config.json';
 import { getResponseBlockMetadata } from '../../../utils/wallet/block.utils';
 import { getNewWallet } from '../../../utils/wallet/Wallet';
 
-export const joinSpace = async (mnemonic: string, space: string) => {
-  console.log('Sending space join request');
+export const declineMember = async (mnemonic: string, space: string, member: string) => {
+  console.log('Sending decline member request');
 
   const wallet = await getNewWallet();
   const sender = await wallet.getIotaAddressDetails(mnemonic);
   const metadata = JSON.stringify({
     request: {
-      requestType: TangleRequestType.SPACE_JOIN,
+      requestType: TangleRequestType.SPACE_ACCEPT_MEMBER,
       uid: space,
+      member,
     },
   });
 

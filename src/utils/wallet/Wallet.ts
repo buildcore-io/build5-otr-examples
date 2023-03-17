@@ -1,5 +1,6 @@
-import { Bip32Path } from "@iota/crypto.js";
+import { Bip32Path } from '@iota/crypto.js';
 import {
+  addressBalance,
   BASIC_OUTPUT_TYPE,
   Bech32Helper,
   Ed25519Address,
@@ -14,22 +15,19 @@ import {
   SingleNodeClient,
   TransactionHelper,
   UnlockTypes,
-} from "@iota/iota.js";
-import { Converter } from "@iota/util.js";
-import { cloneDeep } from "lodash";
-import config from "../../config.json";
+} from '@iota/iota.js';
+import { Converter } from '@iota/util.js';
+import { generateMnemonic } from 'bip39';
+import { cloneDeep } from 'lodash';
+import config from '../../config.json';
 import {
   createUnlock,
   getLedgerInclusionState,
   packEssence,
   packPayload,
   submitBlock,
-} from "./block.utils";
-import {
-  mergeOutputs,
-  packBasicOutput,
-  subtractNativeTokens,
-} from "./output.utils";
+} from './block.utils';
+import { mergeOutputs, packBasicOutput, subtractNativeTokens } from './output.utils';
 
 export interface AddressDetails {
   bech32: string;
@@ -39,10 +37,15 @@ export interface AddressDetails {
 }
 
 export class SmrWallet {
-  constructor(
-    public readonly client: SingleNodeClient,
-    public readonly info: INodeInfo
-  ) {}
+  constructor(public readonly client: SingleNodeClient, public readonly info: INodeInfo) {}
+
+  public getBalance = async (addressBech32: string) => {
+    const balance = await addressBalance(this.client, addressBech32);
+    return Number(balance.balance);
+  };
+
+  public getNewIotaAddressDetails = () =>
+    this.getIotaAddressDetails(generateMnemonic() + ' ' + generateMnemonic());
 
   public getIotaAddressDetails = async (mnemonic: string) => {
     const walletSeed = Ed25519Seed.fromMnemonic(mnemonic);
@@ -55,7 +58,7 @@ export class SmrWallet {
     const bech32 = Bech32Helper.toBech32(
       ED25519_ADDRESS_TYPE,
       walletAddress,
-      this.info.protocol.bech32Hrp
+      this.info.protocol.bech32Hrp,
     );
     return <AddressDetails>{ mnemonic, keyPair, hex, bech32 };
   };
@@ -83,58 +86,39 @@ export class SmrWallet {
     toBech32: string,
     amount: number,
     nativeTokens: INativeToken[] | undefined,
-    metadata: string
+    metadata: string,
   ) => {
     const outputsMap = await this.getOutputs(from.bech32);
-    const output = packBasicOutput(
-      toBech32,
-      amount,
-      nativeTokens,
-      this.info,
-      metadata
-    );
+    const output = packBasicOutput(toBech32, amount, nativeTokens, this.info, metadata);
     if (Object.keys(outputsMap).length === 0) {
-      throw Error(
-        "No outputs to process. Most likely not balance in the wallet."
-      );
+      throw Error('No outputs to process. Most likely not balance in the wallet.');
     }
 
     const remainder = mergeOutputs(cloneDeep(Object.values(outputsMap)));
     remainder.nativeTokens = subtractNativeTokens(remainder, nativeTokens);
-    remainder.amount = (
-      Number(remainder.amount) - Number(output.amount)
-    ).toString();
+    remainder.amount = (Number(remainder.amount) - Number(output.amount)).toString();
 
-    const inputs = Object.keys(outputsMap).map(
-      TransactionHelper.inputFromOutputId
-    );
-    const inputsCommitment = TransactionHelper.getInputsCommitment(
-      Object.values(outputsMap)
-    );
+    const inputs = Object.keys(outputsMap).map(TransactionHelper.inputFromOutputId);
+    const inputsCommitment = TransactionHelper.getInputsCommitment(Object.values(outputsMap));
 
     const essence = packEssence(
       inputs,
       inputsCommitment,
       Number(remainder.amount) > 0 ? [output, remainder] : [output],
-      this
+      this,
     );
     const unlocks: UnlockTypes[] = Object.values(outputsMap).map((_, index) =>
-      !index
-        ? createUnlock(essence, from.keyPair)
-        : { type: REFERENCE_UNLOCK_TYPE, reference: 0 }
+      !index ? createUnlock(essence, from.keyPair) : { type: REFERENCE_UNLOCK_TYPE, reference: 0 },
     );
 
-    console.log("Calculating PoW and sending block");
+    console.log('Calculating PoW and sending block');
     const blockId = await submitBlock(this, packPayload(essence, unlocks));
 
-    console.log("Request sent, blockId", blockId);
-    console.log("Awaiting block inclusion.");
+    console.log('Request sent, blockId', blockId);
+    console.log('Awaiting block inclusion.');
 
-    const ledgerInclusionState = await getLedgerInclusionState(
-      blockId,
-      this.client
-    );
-    if (ledgerInclusionState !== "included") {
+    const ledgerInclusionState = await getLedgerInclusionState(blockId, this.client);
+    if (ledgerInclusionState !== 'included') {
       throw Error(`Invalid ledger inclusion state: ${ledgerInclusionState}`);
     }
     return blockId;
@@ -147,5 +131,5 @@ export const getNewWallet = async () => {
   if (healty) {
     return new SmrWallet(client, await client.info());
   }
-  throw Error("Could not connect to smr node");
+  throw Error('Could not connect to smr node');
 };
