@@ -67,7 +67,7 @@ Below is an example on how to set-up crew3 integration with Soonaverse awards.
       "0x2240f87418a6ddacfde86e30c3c40b95bb7049f6" is space id.
 
   ```bash
-  ts-node src/examples/space/join/exec-join.ts
+  ts-node src/examples/space/join/exec-join.ts 0x2240f87418a6ddacfde86e30c3c40b95bb7049f6
   ```
 
 - go into the space as the other guardian and accept the member. Make the member guardian (this gives the member ability to issue badges).
