@@ -4,7 +4,9 @@
 
 ## Overview
 
-[![Watch the video](./images/tutorial.mp4)](./images/tutorial.mp4)
+https://user-images.githubusercontent.com/130610/227272411-d9bd8810-e310-4804-abeb-d21f92110d7e.mp4
+
+* <sub>video for download [here](./images/tutorial.mp4)</sub>
 
 Below is an example on how to set-up crew3 integration with Soonaverse awards.
 
