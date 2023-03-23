@@ -5,6 +5,9 @@ Make sure to configure config.json with Shimmer NODE and mnemonic for your walle
 
 You can set-up wallet via TanglePay. Use this wallet also to login on Soonaverse to gain access to various places. (i.e. become Guardian of space).
 
+**Tutorials**
+* [Crew3 -> Award (NFT/Tokens)](src/examples/crew3toAward/TUTORIAL.md)
+
 Public "smr_endpoint_url" for:
 - SMR - https://api.shimmer.network
 - RMS - https://api.testnet.shimmer.network
