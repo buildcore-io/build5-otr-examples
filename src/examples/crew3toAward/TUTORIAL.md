@@ -4,6 +4,8 @@
 
 ## Overview
 
+[![Watch the video](./images/tutorial.mp4)](./images/tutorial.mp4)
+
 Below is an example on how to set-up crew3 integration with Soonaverse awards.
 
     1. Create a new mnemonic for your API
