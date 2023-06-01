@@ -1,8 +1,10 @@
+import { IBasicOutput, IndexerPluginClient } from '@iota/iota.js';
 import { MIN_IOTA_AMOUNT, TangleRequestType } from '@soonaverse/lib';
 import { set } from 'lodash';
 import config from '../../config.json';
+import { wait } from '../../utils/wait';
 import { getNewWallet } from '../../utils/wallet/Wallet';
-import { getLedgerInclusionState, getResponseBlockMetadata } from '../../utils/wallet/block.utils';
+import { getOutputMetadata } from '../../utils/wallet/output.utils';
 
 export const mintMetadataNft = async (
   metadata: Record<string, unknown>,
@@ -29,24 +31,14 @@ export const mintMetadataNft = async (
     metadata,
   };
 
-  // If Alias provided, set it. This alias must be in control of the SENDERS address.
+  // Alias where NFT should be added. This alias must be in control of the SENDERS address.
   aliasId && set(request, 'aliasId', aliasId);
 
-  // Collection where NFT should be added or updated.
+  // Collection where NFT should be added.
   collectionId && set(request, 'collectionId', collectionId);
 
-  if (nftId) {
-    // NFT ID that we want to update with new Metadata.
-    set(request, 'nftId', nftId);
-
-    // We have to send the NFT to Soonaverse.
-    console.log('Sending NFT to Soonaverse so it can be updated...');
-    const blockId = await wallet.sendNft(sender, config.tangleRequestBech32, nftId);
-    console.log(
-      'Nft transfer completed ' + 'https://explorer.shimmer.network/shimmer/block/' + blockId,
-    );
-    await getLedgerInclusionState(blockId, wallet.client);
-  }
+  // NFT ID that we want to update with new Metadata.
+  nftId && set(request, 'nftId', nftId);
 
   // Send the on tangle request and wait for inclusion.
   const blockId = await wallet.send(
@@ -57,9 +49,17 @@ export const mintMetadataNft = async (
     JSON.stringify({ request }),
   );
 
-  // Wait for the On Tangle Response.
-  const responseMetadata = await getResponseBlockMetadata(blockId, wallet.client);
-  console.log('Response: ', responseMetadata.response, '\n\n');
+  console.log('Awaiting response, this might take a minute or two...');
 
-  // Best way to get NftId, CollectionId and Alias ID. Assuming there could be multiple various requests with this wallet.
+  const indexer = new IndexerPluginClient(wallet.client);
+  await wait(async () => {
+    const items = (await indexer.basicOutputs({ tagHex: blockId })).items;
+    return items.length === 1;
+  });
+
+  const items = (await indexer.basicOutputs({ tagHex: blockId })).items;
+  const output = (await wallet.client.output(items[0])).output as IBasicOutput;
+  const responseMeta = getOutputMetadata(output);
+  console.log(responseMeta);
+  return { aliasId, collectionId, nftId, ...responseMeta };
 };

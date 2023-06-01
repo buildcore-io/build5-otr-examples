@@ -3,33 +3,32 @@ import {
   BASIC_OUTPUT_TYPE,
   Bech32Helper,
   IBasicOutput,
+  ICommonOutput,
+  IMetadataFeature,
   INativeToken,
   INodeInfo,
   METADATA_FEATURE_TYPE,
   TransactionHelper,
   UnlockConditionTypes,
-} from "@iota/iota.js";
-import { Converter, HexHelper } from "@iota/util.js";
-import bigInt from "big-integer";
-import { cloneDeep, isEmpty } from "lodash";
+} from '@iota/iota.js';
+import { Converter, HexHelper } from '@iota/util.js';
+import bigInt from 'big-integer';
+import { cloneDeep, isEmpty } from 'lodash';
 
 export const packBasicOutput = (
   toBech32: string,
   amount: number,
   nativeTokens: INativeToken[] | undefined,
   info: INodeInfo,
-  metadata: string
+  metadata: string,
 ) => {
-  const targetAddress = Bech32Helper.addressFromBech32(
-    toBech32,
-    info.protocol.bech32Hrp
-  );
+  const targetAddress = Bech32Helper.addressFromBech32(toBech32, info.protocol.bech32Hrp);
   const unlockConditions: UnlockConditionTypes[] = [
     { type: ADDRESS_UNLOCK_CONDITION_TYPE, address: targetAddress },
   ];
   const output: IBasicOutput = {
     type: BASIC_OUTPUT_TYPE,
-    amount: "0",
+    amount: '0',
     nativeTokens: nativeTokens?.map((nt) => ({
       id: nt.id,
       amount: HexHelper.fromBigInt256(bigInt(Number(nt.amount))),
@@ -45,10 +44,7 @@ export const packBasicOutput = (
       },
     ];
   }
-  const storageDeposit = TransactionHelper.getStorageDeposit(
-    output,
-    info.protocol.rentStructure!
-  );
+  const storageDeposit = TransactionHelper.getStorageDeposit(output, info.protocol.rentStructure!);
   output.amount = bigInt.max(bigInt(amount), storageDeposit).toString();
 
   return output;
@@ -56,11 +52,11 @@ export const packBasicOutput = (
 
 export const mergeOutputs = (outputs: IBasicOutput[]) => {
   const addressUnlock = outputs[0].unlockConditions.find(
-    (u) => u.type === ADDRESS_UNLOCK_CONDITION_TYPE
+    (u) => u.type === ADDRESS_UNLOCK_CONDITION_TYPE,
   )!;
   const merged: IBasicOutput = {
     type: BASIC_OUTPUT_TYPE,
-    amount: "0",
+    amount: '0',
     unlockConditions: [addressUnlock],
   };
   for (const output of outputs) {
@@ -70,10 +66,7 @@ export const mergeOutputs = (outputs: IBasicOutput[]) => {
       if (index === -1) {
         nativeTokens.push(nativeToken);
       } else {
-        nativeTokens[index].amount = addHex(
-          nativeTokens[index].amount,
-          nativeToken.amount
-        );
+        nativeTokens[index].amount = addHex(nativeTokens[index].amount, nativeToken.amount);
       }
     }
     merged.amount = (Number(output.amount) + Number(merged.amount)).toString();
@@ -84,16 +77,14 @@ export const mergeOutputs = (outputs: IBasicOutput[]) => {
 
 export const subtractNativeTokens = (
   output: IBasicOutput,
-  nativeTokens: INativeToken[] | undefined
+  nativeTokens: INativeToken[] | undefined,
 ) => {
   if (!output.nativeTokens || !nativeTokens) {
     return output.nativeTokens;
   }
   return cloneDeep(output.nativeTokens || [])
     .map((nativeToken) => {
-      const tokensToSubtract = nativeTokens.find(
-        (t) => t.id === nativeToken.id
-      )?.amount;
+      const tokensToSubtract = nativeTokens.find((t) => t.id === nativeToken.id)?.amount;
       if (!tokensToSubtract) {
         return nativeToken;
       }
@@ -106,11 +97,20 @@ export const subtractNativeTokens = (
 };
 
 export const subtractHex = (a: string, b: string) =>
-  HexHelper.fromBigInt256(
-    HexHelper.toBigInt256(a).subtract(HexHelper.toBigInt256(b))
-  );
+  HexHelper.fromBigInt256(HexHelper.toBigInt256(a).subtract(HexHelper.toBigInt256(b)));
 
 export const addHex = (a: string, b: string) =>
-  HexHelper.fromBigInt256(
-    HexHelper.toBigInt256(a).add(HexHelper.toBigInt256(b))
-  );
+  HexHelper.fromBigInt256(HexHelper.toBigInt256(a).add(HexHelper.toBigInt256(b)));
+
+export const getOutputMetadata = (output: ICommonOutput | undefined) => {
+  try {
+    const metadataFeature = <IMetadataFeature | undefined>(
+      output?.features?.find((f) => f.type === METADATA_FEATURE_TYPE)
+    );
+    const decoded = Converter.hexToUtf8(metadataFeature?.data || '{}');
+    const metadata = JSON.parse(decoded);
+    return metadata || {};
+  } catch (e) {
+    return {};
+  }
+};
