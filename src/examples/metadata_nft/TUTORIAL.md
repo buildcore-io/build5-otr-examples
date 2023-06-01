@@ -8,14 +8,14 @@
 * User is able to build hierarchy between devices (digital twins).
 * User has full control over digital twins.
 
-## Shimmer Network & BUILD.5
+## Shimmer Network & BUILDAVERSE
 
 * Shimmer Network is phasing network for IOTA Network
 * IOTA Network and Shimmer Network are feeless immutable ledgers using unique Tangle technology
 * Shimmer Network has been active since October 2022. See more here: https://shimmer.network
-* BUILD.5 is a non-profit association delivering plug & play tooling on top Shimmer and IOTA. 
-* Soonaverse is phasing network for BUILD.5 production. 
-* Soonaverse operates on Shimmer and BUILD.5 operates on IOTA Network.
+* BUILDAVERSE is a non-profit association delivering plug & play tooling on top Shimmer and IOTA. 
+* Soonaverse is phasing network for BUILDAVERSE production. 
+* Soonaverse operates on Shimmer and BUILDAVERSE operates on IOTA Network.
 * IOTA Mainnet is yet to be upgraded with “Stardust” update to bring digital twin functionality.
 
 ## Assumption & limitation for the prototype
