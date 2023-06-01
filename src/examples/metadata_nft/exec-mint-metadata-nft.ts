@@ -12,7 +12,7 @@ process.removeAllListeners('warning');
 const getDeviceMetadata = async () => {
   return {
     // If it has been previously minted you can provide digitalTwinNftId and it'll cause update of the NFT instead.
-    digitalTwinNftId: undefined, // '0x2b2fe5b4c1b66275e4dfd4e46cc4e0d5c3563c1cc26dd5b600ca584bf88ed3b2',
+    digitalTwinNftId: undefined,
     metadata: {
       uid: '1BEjyVUxoCzVZAEQJZzuZDtXHAPxwCy5Hs',
       hostname: 'Demo Switch Config',

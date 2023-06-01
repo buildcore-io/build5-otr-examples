@@ -40,8 +40,11 @@ export const mintMetadataNft = async (
     set(request, 'nftId', nftId);
 
     // We have to send the NFT to Soonaverse.
-    console.log('Sending NFT to Soonaverse so it can be udpated...');
+    console.log('Sending NFT to Soonaverse so it can be updated...');
     const blockId = await wallet.sendNft(sender, config.tangleRequestBech32, nftId);
+    console.log(
+      'Nft transfer completed ' + 'https://explorer.shimmer.network/shimmer/block/' + blockId,
+    );
     await getLedgerInclusionState(blockId, wallet.client);
   }
 
