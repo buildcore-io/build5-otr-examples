@@ -26,7 +26,6 @@ export const mintMetadataNft = async (
   };
 
   // If Alias provided, set it. This alias must be in control of the SENDERS address.
-  // Alias must be provided if we're adding NFT within collection or updating NFT.
   aliasId && set(request, 'aliasId', aliasId);
 
   // Collection where NFT should be added or updated.

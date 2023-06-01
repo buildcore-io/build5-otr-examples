@@ -1,5 +1,4 @@
 import {
-  IAliasAddress,
   IIssuerFeature,
   INftAddress,
   INftOutput,
@@ -31,14 +30,7 @@ const exec = async () => {
   ) as IIssuerFeature;
   const collectionId = (issuerFeature.address as INftAddress).nftId;
 
-  const collectionItems = (await indexer.nft(collectionId)).items;
-  const collectionOutput = (await wallet.client.output(collectionItems[0])).output as INftOutput;
-  const collectionIssuer = collectionOutput.immutableFeatures?.find(
-    (f) => f.type === ISSUER_FEATURE_TYPE,
-  ) as IIssuerFeature;
-  const aliasId = (collectionIssuer.address as IAliasAddress).aliasId;
-
-  await mintMetadataNft({ name: 'Test2', someValue: 'test_test2' }, aliasId, collectionId);
+  await mintMetadataNft({ name: 'Test2', someValue: 'test_test2' },  collectionId);
 };
 
 exec();
