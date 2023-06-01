@@ -60,6 +60,7 @@ export const mintMetadataNft = async (
   const items = (await indexer.basicOutputs({ tagHex: blockId })).items;
   const output = (await wallet.client.output(items[0])).output as IBasicOutput;
   const responseMeta = getOutputMetadata(output);
-  console.log(responseMeta);
+  console.log('Response data: \n', responseMeta);
+  console.log('------- \n\n');
   return { aliasId, collectionId, nftId, ...responseMeta };
 };
