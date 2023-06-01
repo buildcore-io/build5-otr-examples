@@ -1,20 +1,22 @@
 import { Bip32Path } from '@iota/crypto.js';
 import {
-  addressBalance,
+  ADDRESS_UNLOCK_CONDITION_TYPE,
   BASIC_OUTPUT_TYPE,
   Bech32Helper,
+  ED25519_ADDRESS_TYPE,
   Ed25519Address,
   Ed25519Seed,
-  ED25519_ADDRESS_TYPE,
   IBasicOutput,
   IKeyPair,
   INativeToken,
-  IndexerPluginClient,
+  INftOutput,
   INodeInfo,
+  IndexerPluginClient,
   REFERENCE_UNLOCK_TYPE,
   SingleNodeClient,
   TransactionHelper,
   UnlockTypes,
+  addressBalance,
 } from '@iota/iota.js';
 import { Converter } from '@iota/util.js';
 import { generateMnemonic } from 'bip39';
@@ -28,6 +30,8 @@ import {
   submitBlock,
 } from './block.utils';
 import { mergeOutputs, packBasicOutput, subtractNativeTokens } from './output.utils';
+
+export const EMPTY_NFT_ID = '0x0000000000000000000000000000000000000000000000000000000000000000';
 
 export interface AddressDetails {
   bech32: string;
@@ -111,17 +115,58 @@ export class SmrWallet {
       !index ? createUnlock(essence, from.keyPair) : { type: REFERENCE_UNLOCK_TYPE, reference: 0 },
     );
 
-    console.log('Calculating PoW and sending block');
+    console.log('Calculating PoW and sending block...');
     const blockId = await submitBlock(this, packPayload(essence, unlocks));
 
-    console.log('Request sent, blockId', blockId);
-    console.log('Awaiting block inclusion.');
+    console.log(
+      'Request sent, blockId',
+      'https://explorer.shimmer.network/shimmer/block/' + blockId,
+    );
+    console.log('Awaiting block inclusion...');
 
     const ledgerInclusionState = await getLedgerInclusionState(blockId, this.client);
     if (ledgerInclusionState !== 'included') {
       throw Error(`Invalid ledger inclusion state: ${ledgerInclusionState}`);
     }
     return blockId;
+  };
+
+  public sendNft = async (sourceAddress: AddressDetails, targetAddess: string, nftId?: string) => {
+    const consumedOutputs = await this.getNftOutput(sourceAddress, nftId);
+    const [consumedNftOutputId, consumedNftOutput] = Object.entries(consumedOutputs)[0];
+
+    const nftOutput = cloneDeep(consumedNftOutput);
+    const targetAddress = Bech32Helper.addressFromBech32(
+      targetAddess,
+      this.info.protocol.bech32Hrp,
+    );
+    nftOutput.unlockConditions = [{ type: ADDRESS_UNLOCK_CONDITION_TYPE, address: targetAddress }];
+    if (nftOutput.nftId === EMPTY_NFT_ID) {
+      nftOutput.nftId = TransactionHelper.resolveIdFromOutputId(consumedNftOutputId);
+    }
+
+    const inputs = [consumedNftOutputId].map(TransactionHelper.inputFromOutputId);
+    const inputsCommitment = TransactionHelper.getInputsCommitment([consumedNftOutput]);
+    const essence = packEssence(inputs, inputsCommitment, [nftOutput], this);
+    const payload = packPayload(essence, [createUnlock(essence, sourceAddress.keyPair)]);
+
+    return await submitBlock(this, payload);
+  };
+
+  private getNftOutput = async (address: AddressDetails, nftId?: string) => {
+    const indexer = new IndexerPluginClient(this.client);
+    if (nftId) {
+      const items = (await indexer.nft(nftId)).items;
+      const output = (await this.client.output(items[0])).output;
+      return { [items[0]]: output as INftOutput };
+    }
+
+    const items = (await indexer.nfts({ addressBech32: address.bech32 })).items;
+    const result: { [key: string]: INftOutput } = {};
+    for (const item of items) {
+      result[item] = (await this.client.output(item)).output as INftOutput;
+    }
+    return result;
   };
 }
 
