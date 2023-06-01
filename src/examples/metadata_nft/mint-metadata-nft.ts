@@ -2,7 +2,7 @@ import { MIN_IOTA_AMOUNT, TangleRequestType } from '@soonaverse/lib';
 import { set } from 'lodash';
 import config from '../../config.json';
 import { getNewWallet } from '../../utils/wallet/Wallet';
-import { getResponseBlockMetadata } from '../../utils/wallet/block.utils';
+import { getLedgerInclusionState, getResponseBlockMetadata } from '../../utils/wallet/block.utils';
 
 export const mintMetadataNft = async (
   metadata: Record<string, unknown>,
@@ -35,8 +35,15 @@ export const mintMetadataNft = async (
   // Collection where NFT should be added or updated.
   collectionId && set(request, 'collectionId', collectionId);
 
-  // NFT ID that we want to update with new Metadata.
-  nftId && set(request, 'nftId', nftId);
+  if (nftId) {
+    // NFT ID that we want to update with new Metadata.
+    set(request, 'nftId', nftId);
+
+    // We have to send the NFT to Soonaverse.
+    console.log('Sending NFT to Soonaverse so it can be udpated...');
+    const blockId = await wallet.sendNft(sender, config.tangleRequestBech32, nftId);
+    await getLedgerInclusionState(blockId, wallet.client);
+  }
 
   // Send the on tangle request and wait for inclusion.
   const blockId = await wallet.send(
