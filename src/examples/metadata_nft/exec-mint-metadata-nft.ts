@@ -1,6 +1,12 @@
 import { mintMetadataNft } from './mint-metadata-nft';
 
+// Remove experimental warnings from the console. Only used for "shell" scripts to prettier the console output.
+process.removeAllListeners('warning');
+
 // Sample function to get metadata. Use GET query to get metadata from the device that should be stored within the NFT.
+// Maximum metadata size supported is MAX_METADATA_LENGTH: number = 8192
+//
+// TODO: Enhancement (in-progress) - Utilise multiple UTXO outputs to increase maximum storage soon. This will storage of any metadata size.
 const getDeviceMetadata = async () => {
   return { name: 'Test', someValue: 'test' };
 };

@@ -12,12 +12,16 @@ export const mintMetadataNft = async (
 ) => {
   // If nftId specified we actually update existing NFT. nftId is Digital ID of the device.
   nftId
-    ? console.log('Sending update metadata nft request')
-    : console.log('Sending mint metadata nft request');
+    ? console.log('Submitting update metadata nft request...')
+    : console.log('Submitting mint metadata nft request...');
 
   // Get our wallet and generate senders address from the mnemonic.
   const wallet = await getNewWallet();
   const sender = await wallet.getIotaAddressDetails(config.mnemonic);
+
+  // Your wallet address generated from your mnemonic.
+  // This address MUST have necessary funds for the storage deposit.
+  console.log('Your wallet address: ' + sender.bech32);
 
   // Constract On Tangle Request.
   const request = {
@@ -42,7 +46,6 @@ export const mintMetadataNft = async (
     [],
     JSON.stringify({ request }),
   );
-  console.log('Request send, waiting for response.');
 
   // Wait for the On Tangle Response.
   const responseMetadata = await getResponseBlockMetadata(blockId, wallet.client);

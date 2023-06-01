@@ -115,11 +115,14 @@ export class SmrWallet {
       !index ? createUnlock(essence, from.keyPair) : { type: REFERENCE_UNLOCK_TYPE, reference: 0 },
     );
 
-    console.log('Calculating PoW and sending block');
+    console.log('Calculating PoW and sending block...');
     const blockId = await submitBlock(this, packPayload(essence, unlocks));
 
-    console.log('Request sent, blockId', blockId);
-    console.log('Awaiting block inclusion.');
+    console.log(
+      'Request sent, blockId',
+      'https://explorer.shimmer.network/shimmer/block/' + blockId,
+    );
+    console.log('Awaiting block inclusion...');
 
     const ledgerInclusionState = await getLedgerInclusionState(blockId, this.client);
     if (ledgerInclusionState !== 'included') {
