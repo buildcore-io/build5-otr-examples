@@ -26,8 +26,6 @@
 
 ## Getting started
 
-Make sure you configure your config.json with your own mnemonic and direct it to desired network. See [README.md](./../../../README.md)
-
 Clone git repo:
 
 ```bash
@@ -38,6 +36,12 @@ Install dependences:
 
 ```bash
 npm install
+```
+
+Configure your config.json with your own mnemonic and direct it to desired network. See [README.md](./../../../README.md)
+
+```bash
+vim config.json
 ```
 
 Run mint metadata NFT example
