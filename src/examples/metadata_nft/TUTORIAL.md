@@ -2,7 +2,7 @@
 
 ## Use Case
 
-* User needs ability to create digital twin of a device on immutable ledger.
+* User needs ability to create digital twin of a device on immutable ledger. Digital twin is represented as NFT.
 * Digital Twin contains latest metadata of the device. This metadata are stored as JSON. 
 * User is able to update the metadata anytime at NO COST. The only variable is storage deposit.
 * User is able to build hierarchy between devices (digital twins).
