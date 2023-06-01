@@ -58,13 +58,23 @@ const getDeviceMetadata = async () => {
 const callMetadataNftCreate = async () => {
   const metadata = await getDeviceMetadata();
   // Execute function to Mint Metadata NFT
-  await mintMetadataNft(
+  const result = await mintMetadataNft(
     // Get Device Metadata.
     metadata.metadata,
     undefined,
     undefined,
     metadata.digitalTwinNftId,
   );
+
+  if (result?.nftId) {
+    console.log('Digital Twin ID (NFT): ' + result.nftId + '\n\n');
+    console.log(
+      'See in Shimmer Explorer: ' +
+        'https://explorer.shimmer.network/shimmer/search/' +
+        result.nftId +
+        '\n',
+    );
+  }
 };
 
 callMetadataNftCreate();
