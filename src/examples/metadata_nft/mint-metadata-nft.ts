@@ -12,7 +12,7 @@ export const mintMetadataNft = async (
   collectionId?: string,
   nftId?: string,
 ) => {
-  // If nftId specified we actually update existing NFT. nftId is Digital ID of the device.
+  // If nftId specified we actually update existing NFT.
   nftId
     ? console.log('Submitting update metadata nft request...')
     : console.log('Submitting mint metadata nft request...');
@@ -21,7 +21,7 @@ export const mintMetadataNft = async (
   const wallet = await getNewWallet();
   const sender = await wallet.getIotaAddressDetails(config.mnemonic);
 
-  // Your wallet address generated from your mnemonic.
+  // Your wallet address generated from your mnemonic. This is always same.
   // This address MUST have necessary funds for the storage deposit.
   console.log('Your wallet address: ' + sender.bech32);
 
