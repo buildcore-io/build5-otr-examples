@@ -16,6 +16,10 @@ Public "smr_endpoint_url" for:
 
 "tangleRequestBech32" for Soonaverse testnet (wen2): rms1qp29ma9mugkrlaq9e60pmdray4sn2zjpet4vyk86cezm0jqpdwuhv68j3vh
 
+## Additional documentation on Soonaverse API
+Postman with various API examples: https://www.postman.com/mission-engineer-10706716/workspace/soonaverse
+Custom app using Soonaverse API: https://github.com/soonaverse/soon-portal-angular
+
 ## ts-node src/examples/award/create/create-exec.ts   
 Creates an award using the inputs from config.json and award.json
 
