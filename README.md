@@ -1,9 +1,9 @@
 # Overview
-See various examples how to use on tangle request to interact with Soonaverse.
+See various examples how to use on tangle request to interact with Build5.
 
 Make sure to configure config.json with Shimmer NODE and mnemonic for your wallet.
 
-You can set-up wallet via TanglePay. Use this wallet also to login on Soonaverse to gain access to various places. (i.e. become Guardian of space).
+You can set-up wallet via TanglePay. Use this wallet also to login on Build5 to gain access to various places. (i.e. become Guardian of space).
 
 **Tutorials**
 * [Crew3 -> Award (NFT/Tokens)](src/examples/crew3toAward/TUTORIAL.md)
@@ -12,13 +12,13 @@ Public "smr_endpoint_url" for:
 - SMR - https://api.shimmer.network
 - RMS - https://api.testnet.shimmer.network
 
-"tangleRequestBech32" for Soonaverse production: smr1qp0248uakdvfrhyr58yk5lswhnt033vrhst2j4c77laepdv2rk0psgh4t4x
+"tangleRequestBech32" for Build5 production: smr1qp0248uakdvfrhyr58yk5lswhnt033vrhst2j4c77laepdv2rk0psgh4t4x
 
-"tangleRequestBech32" for Soonaverse testnet (wen2): rms1qp29ma9mugkrlaq9e60pmdray4sn2zjpet4vyk86cezm0jqpdwuhv68j3vh
+"tangleRequestBech32" for Build5 testnet (wen2): rms1qp29ma9mugkrlaq9e60pmdray4sn2zjpet4vyk86cezm0jqpdwuhv68j3vh
 
-## Additional documentation on Soonaverse API
+## Additional documentation on Build5 API
 - Postman with various API examples: https://www.postman.com/mission-engineer-10706716/workspace/soonaverse
-- Custom app using Soonaverse API: https://github.com/soonaverse/soon-portal-angular
+- Custom app using Build5 API: https://github.com/build-5/portal-angular-example
 
 ## ts-node src/examples/award/create/create-exec.ts   
 Creates an award using the inputs from config.json and award.json
@@ -58,8 +58,8 @@ Generate random mnemonic seed
 
 # 🤝 Contributing
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/soonaverse/soonaverse/pulls)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/build-5/core/pulls)
 
-We welcome all contributions. Please read our [CONTRIBUTING.md](https://github.com/soonaverse/soonaverse/blob/master/CONTRIBUTING.md) first. You can submit any ideas as [pull requests](https://github.com/soonaverse/soonaverse/pulls) or as [GitHub issues](https://github.com/soonaverse/soonaverse/issues).
+We welcome all contributions. Please read our [CONTRIBUTING.md](https://github.com/build-5/core/blob/master/CONTRIBUTING.md) first. You can submit any ideas as [pull requests](https://github.com/build-5/core/pulls) or as [GitHub issues](https://github.com/build-5/core/issues).
 
 Thank you for supporting us free open source licenses.
