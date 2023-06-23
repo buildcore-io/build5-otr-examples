@@ -1,18 +1,18 @@
 {
   "dependencies": {
-    "@iota/crypto.js": "2.0.0-rc.1",
-    "@iota/iota.js": "2.0.0-rc.1",
+    "@iota/crypto.js": "2.0.0-rc.2",
+    "@iota/iota.js": "2.0.0-rc.4",
     "@iota/pow-wasm.js": "^1.8.6",
-    "@iota/util.js": "2.0.0-rc.1",
-    "@soonaverse/interfaces": "^0.18.47",
-    "@soonaverse/lib": "^0.18.47",
+    "@iota/util.js": "2.0.0-rc.2",
+    "@build-5/lib": "^0.19.21",
+    "@build-5/interfaces": "^0.19.21",
     "bip39": "^3.1.0",
-    "dayjs": "^1.11.7",
+    "dayjs": "^1.11.8",
     "lodash": "^4.17.21",
     "ts-node": "^10.9.1"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.191",
+    "@types/lodash": "^4.14.195",
     "typescript": "^5.0.2"
   }
 }
