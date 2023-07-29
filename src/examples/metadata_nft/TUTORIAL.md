@@ -29,7 +29,7 @@
 Clone git repo:
 
 ```bash
-git clone git@github.com:soonaverse/soonaverse-examples.git
+git clone git@github.com:build-5/build5-otr-examples.git
 ```
 
 Install dependences:
