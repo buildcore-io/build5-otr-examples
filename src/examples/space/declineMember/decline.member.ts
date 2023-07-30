@@ -1,7 +1,7 @@
-import { MIN_IOTA_AMOUNT, TangleRequestType } from '@soonaverse/interfaces';
+import { MIN_IOTA_AMOUNT, TangleRequestType } from '@build-5/interfaces';
 import config from '../../../config.json';
-import { getResponseBlockMetadata } from '../../../utils/wallet/block.utils';
 import { getNewWallet } from '../../../utils/wallet/Wallet';
+import { getResponseBlockMetadata } from '../../../utils/wallet/block.utils';
 
 export const declineMember = async (mnemonic: string, space: string, member: string) => {
   console.log('Sending decline member request');

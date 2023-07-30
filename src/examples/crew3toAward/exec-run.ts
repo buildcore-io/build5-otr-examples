@@ -1,7 +1,7 @@
-import { MIN_IOTA_AMOUNT, TangleRequestType } from '@soonaverse/interfaces';
-import { AwardParticipantRepository, SoonEnv } from '@soonaverse/lib';
-import { getResponseBlockMetadata } from '../../utils/wallet/block.utils';
+import { MIN_IOTA_AMOUNT, TangleRequestType } from '@build-5/interfaces';
+import { AwardParticipantRepository, Build5Env } from '@build-5/lib';
 import { getNewWallet } from '../../utils/wallet/Wallet';
+import { getResponseBlockMetadata } from '../../utils/wallet/block.utils';
 import config from './../../config.json';
 import intConfig from './integration-config.json';
 
@@ -27,7 +27,7 @@ const exec = async () => {
       return r.user?.addresses.ethereum;
     });
 
-    const participantsRepo = new AwardParticipantRepository(SoonEnv.PROD);
+    const participantsRepo = new AwardParticipantRepository(Build5Env.PROD);
     const wallet = await getNewWallet();
     const sender = await wallet.getIotaAddressDetails(config.mnemonic);
     const finalList: string[] = [];

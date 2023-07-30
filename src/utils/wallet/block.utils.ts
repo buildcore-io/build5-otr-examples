@@ -1,3 +1,4 @@
+import { KEY_NAME_TANGLE } from '@build-5/interfaces';
 import { Ed25519 } from '@iota/crypto.js';
 import {
   DEFAULT_PROTOCOL_VERSION,
@@ -21,7 +22,6 @@ import {
 } from '@iota/iota.js';
 import { WasmPowProvider } from '@iota/pow-wasm.js';
 import { Converter, WriteStream } from '@iota/util.js';
-import { KEY_NAME_TANGLE } from '@soonaverse/interfaces';
 import { wait } from '../wait';
 import { SmrWallet } from './Wallet';
 

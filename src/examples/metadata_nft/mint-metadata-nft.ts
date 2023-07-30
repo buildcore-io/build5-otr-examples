@@ -1,5 +1,5 @@
+import { MIN_IOTA_AMOUNT, TangleRequestType } from '@build-5/lib';
 import { IBasicOutput, IndexerPluginClient } from '@iota/iota.js';
-import { MIN_IOTA_AMOUNT, TangleRequestType } from '@soonaverse/lib';
 import { set } from 'lodash';
 import config from '../../config.json';
 import { wait } from '../../utils/wait';

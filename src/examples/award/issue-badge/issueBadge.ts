@@ -1,10 +1,10 @@
-import { MIN_IOTA_AMOUNT, TangleRequestType } from "@soonaverse/interfaces";
-import config from "../../../config.json";
-import { getResponseBlockMetadata } from "../../../utils/wallet/block.utils";
-import { getNewWallet } from "../../../utils/wallet/Wallet";
+import { MIN_IOTA_AMOUNT, TangleRequestType } from '@build-5/interfaces';
+import config from '../../../config.json';
+import { getNewWallet } from '../../../utils/wallet/Wallet';
+import { getResponseBlockMetadata } from '../../../utils/wallet/block.utils';
 
 export const issueBadge = async (award: string, members: string[]) => {
-  console.log("Issuing badges for award", award);
+  console.log('Issuing badges for award', award);
 
   const wallet = await getNewWallet();
   const sender = await wallet.getIotaAddressDetails(config.mnemonic);
@@ -20,13 +20,10 @@ export const issueBadge = async (award: string, members: string[]) => {
     config.tangleRequestBech32,
     0.5 * MIN_IOTA_AMOUNT,
     [],
-    metadata
+    metadata,
   );
 
-  const responseMetadata = await getResponseBlockMetadata(
-    blockId,
-    wallet.client
-  );
+  const responseMetadata = await getResponseBlockMetadata(blockId, wallet.client);
   responseMetadata.response && console.log(responseMetadata.response);
   return responseMetadata.response;
 };

@@ -1,7 +1,7 @@
-import { MIN_IOTA_AMOUNT, TangleRequestType } from '@soonaverse/interfaces';
+import { MIN_IOTA_AMOUNT, TangleRequestType } from '@build-5/interfaces';
 import config from '../../../config.json';
-import { getResponseBlockMetadata } from '../../../utils/wallet/block.utils';
 import { getNewWallet } from '../../../utils/wallet/Wallet';
+import { getResponseBlockMetadata } from '../../../utils/wallet/block.utils';
 
 export const joinSpace = async (mnemonic: string, space: string) => {
   console.log('Sending space join request');
