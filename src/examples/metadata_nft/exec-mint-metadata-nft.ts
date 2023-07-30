@@ -34,21 +34,21 @@ const getDeviceMetadata = async () => {
 };
 
 /**
- * Use below example function to mint Metadata NFT (Digital Twin). It's using standard IOTA.js libraries to contract request to Soonaverse.
+ * Use below example function to mint Metadata NFT (Digital Twin). It's using standard IOTA.js libraries to contract request to Build-5.
  * This can be technically replicated in other languages using other IOTA libraries.
  *
  * You can use the function to mint new digital twin or update metadata on an exiting one.
  *
- * This method uses Soonaverse On Tangle requests. API can also be used. Advantage of On Tangle Requests is that all communication
+ * This method uses Build-5 On Tangle requests. API can also be used. Advantage of On Tangle Requests is that all communication
  * happens directly through local node that can run within consumer's infrastructure. It also runs directly on L1 chain. This provides more secure way
  * to execute the request as requester IPs are not exposed.
  *
- * Soonaverse pick-ups these requests and process them through Tangle. It correctly create/updates appropriate records on immutable ledger.
+ * Build-5 pick-ups these requests and process them through Tangle. It correctly create/updates appropriate records on immutable ledger.
  *
  * There is NO COST in executing these transaction. Only cost is storage deposit. Any data stored on Tangle requires storage deposit. Based on the amount
  * of the data stored this storage deposit requirement can change. Since we only want to always store most recent config consumer will not occur increasing
  * cost. They will still be able to use "permanodes" to access / view previous versions. Consumer can choose to run permanodes within their infrastructure or
- * utilize Soonaverse to keep historical changes forever.
+ * utilize Build-5 to keep historical changes forever.
  *
  *
  * Important:

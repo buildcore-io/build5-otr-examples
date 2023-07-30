@@ -1,6 +1,6 @@
-# Crew3 Soonaverse Award Integration Guide
+# Crew3 Build-5 Award Integration Guide
 
-![crew3 soonaverse banner](./images/banner.png)
+![crew3 Build-5 banner](./images/banner.png)
 
 ## Overview
 
@@ -8,11 +8,11 @@ https://user-images.githubusercontent.com/130610/227272411-d9bd8810-e310-4804-ab
 
 * <sub>video for download [here](./images/tutorial.mp4)</sub>
 
-Below is an example on how to set-up crew3 integration with Soonaverse awards.
+Below is an example on how to set-up crew3 integration with Build-5 awards.
 
     1. Create a new mnemonic for your API
     2. Make the API guardian on the space
-    3. Create award within the Soonaverse that's linked to quest in crew3
+    3. Create award within the Build-5 that's linked to quest in crew3
     4. Use script to query crew3 and issue new badge's when quest completed
 
 ## 1. Create a new mnemonic for your API
@@ -80,7 +80,7 @@ Below is an example on how to set-up crew3 integration with Soonaverse awards.
   ![manage member](./images/step2/2.png)
   ![make member guardian](./images/step2/3.png)
 
-## 3. Create award within the Soonaverse that's linked to quest in crew3
+## 3. Create award within the Build-5 that's linked to quest in crew3
 
 - as existing guardian of the space, create an award and fund it. Make sure to set enough available badges you might need for quests in crew3.
   ![make member guardian](./images/step3/1.png)

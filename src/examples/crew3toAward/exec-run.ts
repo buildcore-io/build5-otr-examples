@@ -31,12 +31,12 @@ const exec = async () => {
     const wallet = await getNewWallet();
     const sender = await wallet.getIotaAddressDetails(config.mnemonic);
     const finalList: string[] = [];
-    // Check if user already been given badges in Soonaverse, if not issue one.
+    // Check if user already been given badges in Build-5, if not issue one.
     process.stdout.write('Checking if they were already given badge...');
     for (const e of allEthAddresses) {
       // You could run this in parallel you just need to handle max requests per seconds allowed by Soon API.
       const out = await participantsRepo.getById(intConfig.awardUid, e);
-      if (!Object.keys(out).length) {
+      if (!Object.keys(out!).length) {
         finalList.push(e);
       }
       process.stdout.write('.');
