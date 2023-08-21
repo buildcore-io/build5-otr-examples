@@ -7,6 +7,7 @@ You can set-up wallet via TanglePay. Use this wallet also to login on Build5 to 
 
 **Tutorials**
 * [Crew3 -> Award (NFT/Tokens)](src/examples/crew3toAward/TUTORIAL.md)
+* [Digital Twin NFT](src/examples/metadata_nft/TUTORIAL.md)
 
 Public "smr_endpoint_url" for:
 - SMR - https://api.shimmer.network
