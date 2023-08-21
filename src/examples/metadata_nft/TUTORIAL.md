@@ -3,9 +3,9 @@
 ## Use Case
 
 * An ability to create digital twin of a device on immutable ledger. Digital twin is represented as NFT.
-* Digital Twin contains latest metadata of the device. This metadata are stored as JSON. 
+* Digital Twin contains latest metadata of the device. This metadata are stored as JSON. There is persisent link to latest data.
 * User is able to update the metadata anytime at NO COST. The only variable is storage deposit.
-* User is able to build hierarchy between devices (digital twins).
+* User is able to build hierarchy between devices (digital twins). ie. Assembly item and its components. 
 * User has full control over digital twins.
 
 ## Shimmer Network & BUILDAVERSE
