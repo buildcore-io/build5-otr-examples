@@ -1,5 +1,5 @@
 # Overview
-See various examples how to use on tangle request to interact with Build5.
+See various examples how to use on tangle request to interact with BUILD.5.
 
 Make sure to configure config.json with Shimmer NODE and mnemonic for your wallet.
 
@@ -12,13 +12,13 @@ Public "smr_endpoint_url" for:
 - SMR - https://api.shimmer.network
 - RMS - https://api.testnet.shimmer.network
 
-"tangleRequestBech32" for Build5 production: smr1qp0248uakdvfrhyr58yk5lswhnt033vrhst2j4c77laepdv2rk0psgh4t4x
+"tangleRequestBech32" for BUILD.5 production: smr1qp0248uakdvfrhyr58yk5lswhnt033vrhst2j4c77laepdv2rk0psgh4t4x
 
-"tangleRequestBech32" for Build5 testnet (wen2): rms1qp29ma9mugkrlaq9e60pmdray4sn2zjpet4vyk86cezm0jqpdwuhv68j3vh
+"tangleRequestBech32" for BUILD.5 testnet (wen2): rms1qp29ma9mugkrlaq9e60pmdray4sn2zjpet4vyk86cezm0jqpdwuhv68j3vh
 
-## Additional documentation on Build5 API
+## Additional documentation on BUILD.5 API
 - Postman with various API examples: https://www.postman.com/mission-engineer-10706716/workspace/soonaverse
-- Custom app using Build5 API: https://github.com/build-5/portal-angular-example
+- Custom app using BUILD.5 API: https://github.com/build-5/portal-angular-example
 
 ## ts-node src/examples/award/create/create-exec.ts   
 Creates an award using the inputs from config.json and award.json
