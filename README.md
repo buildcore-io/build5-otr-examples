@@ -13,7 +13,9 @@ Public "smr_endpoint_url" for:
 - SMR - https://api.shimmer.network
 - RMS - https://api.testnet.shimmer.network
 
-"tangleRequestBech32" for BUILD.5 production: smr1qp0248uakdvfrhyr58yk5lswhnt033vrhst2j4c77laepdv2rk0psgh4t4x
+"tangleRequestBech32" for BUILD.5 production (IOTA): iota1qpwxxaw6fw8zeezefyqf0y7hnrpkcmfa4afc67ywfkpp3gwj0ttzcexhvan
+
+"tangleRequestBech32" for BUILD.5 production (Shimmer): smr1qp0248uakdvfrhyr58yk5lswhnt033vrhst2j4c77laepdv2rk0psgh4t4x
 
 "tangleRequestBech32" for BUILD.5 testnet (wen2): rms1qp29ma9mugkrlaq9e60pmdray4sn2zjpet4vyk86cezm0jqpdwuhv68j3vh
 
